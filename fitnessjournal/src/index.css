@@ -1,0 +1,43 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: black;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.app-title {
+  
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-item {
+  font-size: 1.5em;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
+}
