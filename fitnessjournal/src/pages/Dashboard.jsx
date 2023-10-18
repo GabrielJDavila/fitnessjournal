@@ -10,7 +10,7 @@ export default function Dashboard() {
 
             <section className="dash-links-container">
                 <div className="start-new-workout-container">
-                    <Link to="AllExercises" className="link-portal-dash">
+                    <Link to="AllCategories" className="link-portal-dash">
                         <i className="fa-solid fa-plus"></i>
                         <p className="link-text">Start New Workout</p>
                     </Link>

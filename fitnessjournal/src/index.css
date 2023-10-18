@@ -9,16 +9,18 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
+h2 {
+  font-size: 1.5rem;
+}
+
+h3, label {
+  font-size: 1.5rem;
+}
+
 p {
   font-size: 1.5rem;
 }
 
-.page-container {
-  text-align: center;
-  width: 100%;
-  max-width: 900px;
-  margin: 1rem auto 0;
-}
 /* header and nav styles */
 header {
   background: black;
@@ -135,6 +137,14 @@ header {
 }
 
 /* All Exercises page styles */
+
+.all-ex-page-container {
+  text-align: center;
+  width: 90%;
+  max-width: 900px;
+  margin: 1rem auto 0;
+}
+
 .search-ex-form {
   width: 100%;
   display: flex;
@@ -152,9 +162,9 @@ header {
   height: 2rem;
   border: none;
   border-bottom: 2px solid lightgray;
-  padding: 1rem;
+  padding: 1em;
   font-family: 'Oswald', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .search-ex-input:focus {
@@ -165,8 +175,86 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-bottom: 2px solid grey;
+  font-size: 1.5rem;
+}
+
+.category-name {
+  font-size: 1.5rem;
+}
+
+/* NewEx.jsx styles */
+
+.add-ex-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+
+.new-ex-name, select {
+  height: 50px;
+  border: none;
+  border-bottom: 1px solid rgb(220, 104, 75);
+  font-family: "Oswald", sans-serif;
+  font-size: 1.5rem;
+  color: black;
+  margin-bottom: 2rem;
+}
+
+/* NewCat.jsx styles */
+
+.new-cat-container {
+  position: fixed;
+  top: 100px;
+  right: 50px;
+  left: 50px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 10px 1px rgb(131, 131, 131);
+}
+
+.new-cat-title {
+  
+}
+
+.new-cat {
+  
+}
+
+.new-cat-btns-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.cancel-cat {
+  background: rgb(220, 104, 75);
+  height: 40px;
+  width: 50%;
+  margin: 0;
+}
+
+.save-cat {
+  font-family: "Oswald", sans-serif;
+  font-size: 1.5rem;
+  border: none;
+  background: white;
+  width: 50%;
+  height: 40px;
+  background: rgb(220, 104, 75);
 }
 
 /* utility classes */
