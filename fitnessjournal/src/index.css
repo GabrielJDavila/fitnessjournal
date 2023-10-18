@@ -88,6 +88,11 @@ header {
   padding: .5rem;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: .2s ease-in-out;
+}
+
+.menu-item:hover {
+  background: rgb(183, 75, 47);
 }
 
 /* Dashboard styles */
