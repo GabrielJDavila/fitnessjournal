@@ -2,24 +2,34 @@ import { useState } from "react"
 
 export default function Category(props) {
 
-    const [toggleEdit, setToggleEdit] = useState(false)
+    const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false)
+    const [openEditModal, setOpenEditModal] = useState(false)
     
-    function handleEditToggle() {
+    function handleEdit() {
         setToggleEdit(prev => !prev)
     }
 
-    const ellipsisStyles = {
-        transform: toggleEdit ? "rotate(90deg)" : "rotate(0)"
+    function handleEdit() {
+        setOpenEditModal(prev => !prev)
+    }
+
+    function handleDelete() {
+        setOpenConfirmDeleteModal(prev => !prev)
     }
 
     return (
         <div className="category-container">
             <p className="category-name">{props.name}</p>
-            <i 
-                onClick={handleEditToggle}
-                className="fa-solid fa-ellipsis-vertical category-edit"
-                style={ellipsisStyles}
-            ></i>
+            <div className="category-component-btns">
+                <i
+                    className="fa-solid fa-pen-to-square category-edit"
+                    onClick={handleEdit}
+                ></i>
+                <i
+                    className="fa-solid fa-trash category-delete"
+                    onClick={handleDelete}
+                ></i>
+            </div>
         </div>
     )
 }

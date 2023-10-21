@@ -13,7 +13,7 @@ h2, h3, label, p {
   font-size: 1.5rem;
 }
 
-/* header and nav styles */
+/* ============= header and nav styles ==============*/
 header {
   background: black;
   color: white;
@@ -90,7 +90,35 @@ header {
   background: rgb(183, 75, 47);
 }
 
-/* Dashboard styles */
+/* ============ Category.jsx styles ===================*/
+
+.category-container {
+ 
+}
+
+.category-dropdown {
+  background: rgb(220, 104, 75);
+  position: absolute;
+  right: 10px;
+  z-index: 2;
+  font-size: 1.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0;
+  width: 120px;
+}
+
+
+
+.category-component-btns {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/*============ Dashboard styles ======================*/
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -129,7 +157,7 @@ header {
   margin-top: .5rem;
 }
 
-/* All Exercises page styles */
+/*=============== AllCategories.jsx styles ====================*/
 
 .all-ex-page-container {
   text-align: center;
@@ -186,7 +214,7 @@ header {
   color: rgb(220, 104, 75);
 }
 
-/* NewEx.jsx styles */
+/*=================== NewEx.jsx styles ====================*/
 
 .add-ex-form {
   display: flex;
@@ -208,7 +236,7 @@ header {
   margin-bottom: 2rem;
 }
 
-/* NewCat.jsx styles */
+/*============ NewCat.jsx styles ===================*/
 
 .new-cat-container {
   position: fixed;
