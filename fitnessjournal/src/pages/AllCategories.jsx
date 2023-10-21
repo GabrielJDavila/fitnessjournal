@@ -1,5 +1,7 @@
 import Category from "../components/Category"
+import { useState } from "react"
 export default function AllCategories() {
+    
     return (
         <div className="all-ex-page-container">
             <form className="search-ex-form">
