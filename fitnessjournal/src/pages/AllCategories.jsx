@@ -1,8 +1,18 @@
 import Category from "../components/Category"
 import { useState } from "react"
 export default function AllCategories() {
-    
-    const editModalStyles = {
+    const [toggleEditModal, setToggleEditModal] = useState(false)
+    const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false)
+
+    function toggleDelete() {
+        setOpenConfirmDeleteModal(prev => !prev)
+    }
+
+    function toggleEdit() {
+        setToggleEditModal(prev => !prev)
+    }
+
+    const modalStyles = {
         position: "absolute",
         right: "50px",
         left: "50px",
@@ -11,11 +21,19 @@ export default function AllCategories() {
     }
 
     const editModal =
-        <div className="editModal" style={editModalStyles}>
+        <div className="edit-modal" style={modalStyles}>
             <h2>Edit Category</h2>
             <p>Cat. Name</p>
-            <p>cancel</p>
-            <button>save</button>
+            <p onClick={toggleEdit} className="cancel-btn">cancel</p>
+            <button className="confirm-btn">save</button>
+        </div>
+    
+    const confirmDeleteModal =
+        <div className="confirm-delete-modal" style={modalStyles}>
+            <h2>Delete Category</h2>
+            <p>Are you sure you want to delete Cat. Name?</p>
+            <p onClick={toggleDelete} className="cancel-btn">cancel</p>
+            <button className="confirm-btn">delete</button>
         </div>
 
     return (
@@ -28,10 +46,11 @@ export default function AllCategories() {
                     className="search-ex-input"
                 />
             </form>
-            {editModal}
-            <Category name={"Legs"}/>
-            <Category name={"Back"}/>
-            <Category name={"Chest"}/>
+            {toggleEditModal && editModal}
+            {openConfirmDeleteModal && confirmDeleteModal}
+            <Category name={"Legs"} toggleEdit={toggleEdit} toggleDelete={toggleDelete}/>
+            <Category name={"Back"} toggleEdit={toggleEdit} toggleDelete={toggleDelete}/>
+            <Category name={"Chest"} toggleEdit={toggleEdit} toggleDelete={toggleDelete}/>
         </div>
     )
 }

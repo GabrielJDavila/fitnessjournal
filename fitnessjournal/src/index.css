@@ -274,7 +274,7 @@ header {
   justify-content: center;
 }
 
-.cancel-cat {
+.cancel-btn {
   background: #EFEFEF;
   border: 1px solid rgb(122, 122, 122);
   height: 40px;
@@ -284,7 +284,7 @@ header {
   transition: .2s ease-in-out;
 }
 
-.save-cat {
+.confirm-btn {
   font-family: "Oswald", sans-serif;
   border: 1px solid rgb(122, 122, 122);
   font-size: 1.5rem;

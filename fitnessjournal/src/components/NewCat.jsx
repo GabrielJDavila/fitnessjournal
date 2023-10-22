@@ -8,8 +8,8 @@ export default function NewCat() {
                 className="new-cat"
             />
             <div className="new-cat-btns-container">
-                <p className="cancel-cat">cancel</p>
-                <button className="save-cat">save</button>
+                <p className="cancel-btn">cancel</p>
+                <button className="confirm-btn">save</button>
             </div>
         </form>
     )
