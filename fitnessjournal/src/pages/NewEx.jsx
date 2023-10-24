@@ -1,11 +1,39 @@
+import { useState } from "react"
 
 export default function NewEx() {
+    const [newExFormData, setNewExFormData] = useState({
+        name: "",
+        category: "",
+        type: "",
+        weightUnit: ""
+    })
+
+    console.log(newExFormData.name)
+
+    function clearForm() {
+        setNewExFormData({
+            name: "",
+            category: "",
+            type: "",
+            weightUnit: ""
+        })
+    }
+
+    function handleChange(name, value, stateSetter) {
+        stateSetter(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
     return (
         <form className="add-ex-form">
             <label htmlFor="new-ex-name">Name</label>
             <input
                 type="text"
-                name="new-ex-name"
+                name="name"
+                onChange={e => handleChange(e.target.name, e.target.value, setNewExFormData)}
+                value={newExFormData.name}
                 id="new-ex-name"
                 placeholder="exercise name"
                 className="new-ex-name"
