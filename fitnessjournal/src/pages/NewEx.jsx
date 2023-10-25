@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { categoriesArr, getCategories } from "../firebase"
-import { collection } from "firebase/firestore"
+import { doc } from "firebase/firestore"
+import { getCategories, categoriesCollection, addToCategory } from "../firebase"
 
 export default function NewEx() {
     const [newExFormData, setNewExFormData] = useState({
@@ -11,28 +11,47 @@ export default function NewEx() {
     })
     const [loadedCategories, setLoadedCategories] = useState([])
 
-    async function loadCategoriesFromFirebase(collection) {
+    console.log(newExFormData)
+
+    async function loadData() {
         try {
-            const data = await getCategories(collection)
+            const data = await getCategories(categoriesCollection)
             setLoadedCategories(data)
         } catch(e) {
-            console.log("error: ", e)
+            console.log("error retrieving data: ", e)
         }
     }
 
-    // function IterateThroughArr() {
-    //     return categoriesArr.map(item => {
-    //         return (
-                
-    //         )
-    //     })
-    // }
-
     useEffect(() => {
-        loadCategoriesFromFirebase()
+        loadData()
     }, [])
 
-    console.log(loadedCategories)
+    function handleSubmit(e) {
+        e.preventDefault()
+        const selectedCategory = loadedCategories.find(cat => cat.name === newExFormData.category)
+        if(selectedCategory) {
+            addToCategory(newExFormData.name, newExFormData.scheme, newExFormData.weightUnit, categoriesCollection, selectedCategory.id)
+            clearForm()
+        } else {
+            console.log("invalid category selected")
+        }
+        
+    }
+
+    function handleChange(name, value, stateSetter) {
+        stateSetter(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const renderedCategories = loadedCategories.map(obj => {
+        return (
+            <option value={obj.name} key={obj.id}>
+                {obj.name}
+            </option>
+        )
+    })
 
     function clearForm() {
         setNewExFormData({
@@ -43,21 +62,9 @@ export default function NewEx() {
         })
     }
 
-    function handleChange(name, value, stateSetter) {
-        stateSetter(prev => ({
-            ...prev,
-            [name]: value
-        }))
-    }
-
-    const categoryOptions = categoriesArr.map(category => {
-        return (
-            `<option value=${category}>${category}</option`
-        )
-    })
 
     return (
-        <form className="add-ex-form">
+        <form onSubmit={handleSubmit} className="add-ex-form">
             <label htmlFor="new-ex-name">Name</label>
             <input
                 type="text"
@@ -69,14 +76,16 @@ export default function NewEx() {
                 className="new-ex-name"
             />
 
-            <label htmlFor="categories-dropdown">Category</label>
+            <label htmlFor="categories-dropdown-menu">Category</label>
             <select
                 name="category"
                 onChange={e => handleChange(e.target.name, e.target.value, setNewExFormData)}
                 id="categories-dropdown-menu"
                 className="categories-dropdown"
+                defaultValue={newExFormData.category}
             >
-                {categoryOptions}
+                <option value="">-- select --</option>
+                {loadedCategories && renderedCategories}
             </select>
 
             <label htmlFor="ex-type-dropdown">Type</label>
@@ -85,7 +94,9 @@ export default function NewEx() {
                 onChange={e => handleChange(e.target.name, e.target.value, setNewExFormData)}
                 id="ex-type-dropdown"
                 className="ex-scheme"
+                defaultValue={newExFormData.type}
             >
+                <option value="">-- select --</option>
                 <option value="weight-reps">weight and reps</option>
                 <option value="weight-time">Weight and time</option>
                 <option value="weight-distance">Weight and distance</option>
@@ -97,10 +108,13 @@ export default function NewEx() {
                 onChange={e => handleChange(e.target.name, e.target.value, setNewExFormData)}
                 id="weight-unit-dropdown"
                 className="weight-unit"
+                defaultValue={newExFormData.weightUnit}
             >
+                <option value="">-- select --</option>
                 <option value="weight-lbs">lbs</option>
                 <option value="weight-kg">kg</option>
             </select>
+            <button className="confirm-btn">add exercise</button>
         </form>
     )
 }
