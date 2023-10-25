@@ -31,6 +31,20 @@ export const triceps = collection(db, "triceps")
 export const abs = collection(db, "abs")
 export const cardio = collection(db, "cardio")
 
+export const categoriesArr = [
+    quads,
+    hamstrings,
+    glutes,
+    calves,
+    chest,
+    back,
+    shoulders,
+    biceps,
+    triceps,
+    abs,
+    cardio
+]
+
 // add new exercise to category
 export async function addToCategory(name, category, type, weightUnit, collectionName) {
     try {

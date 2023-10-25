@@ -1,5 +1,19 @@
 import Category from "../components/Category"
 import { useState } from "react"
+import { categoriesArr } from "../firebase"
+// import {
+//     quads,
+//     hamstrings,
+//     glutes,
+//     calves,
+//     chest,
+//     back,
+//     biceps,
+//     triceps,
+//     shoulders,
+//     abs,
+//     cardio
+// } from "../firebase"
 export default function AllCategories() {
     const [toggleEditModal, setToggleEditModal] = useState(false)
     const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false)
