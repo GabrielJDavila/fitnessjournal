@@ -1,5 +1,6 @@
 import Category from "../components/Category"
 import { useState } from "react"
+
 export default function AllCategories() {
     const [toggleEditModal, setToggleEditModal] = useState(false)
     const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false)

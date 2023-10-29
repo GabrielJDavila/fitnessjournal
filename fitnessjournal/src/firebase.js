@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getFirestore, collection, getDocs, getDoc, addDoc, doc, query } from "firebase/firestore"
+import { getFirestore, collection, getDocs, getDoc, addDoc, setDoc, doc, query } from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,26 +18,40 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-// Initialize category references
-export const quads = collection(db, "quads")
-export const hamstrings = collection(db, "hamstrings")
-export const glutes = collection(db, "glutes")
-export const calves = collection(db, "calves")
-export const chest = collection(db, "chest")
-export const back = collection(db, "back")
-export const shoulders = collection(db, "shoulders")
-export const biceps = collection(db, "biceps")
-export const triceps = collection(db, "triceps")
-export const abs = collection(db, "abs")
-export const cardio = collection(db, "cardio")
+// Initialize firestore references
+export const categoriesCollection = collection(db, "categories")
+// export const quads = doc(categoriesCollection, "quads")
+// export const hamstrings = doc(categoriesCollection, "hamstrings")
+// export const glutes = doc(categoriesCollection, "glutes")
+// export const calves = doc(categoriesCollection, "calves")
+// export const chest = doc(categoriesCollection, "chest")
+// export const back = doc(categoriesCollection, "back")
+// export const shoulders = doc(categoriesCollection, "shoulders")
+// export const biceps = doc(categoriesCollection, "biceps")
+// export const triceps = doc(categoriesCollection, "triceps")
+// export const abs = doc(categoriesCollection, "abs")
+// export const cardio = doc(categoriesCollection, "cardio")
+
+// add new category subcollection
+export async function addNewCategory(category, collectionType) {
+    const capitalizedCat = category.charAt(0).toUpperCase() + category.slice(1)
+    try {
+        await addDoc(collectionType, {
+            name: capitalizedCat
+        })
+    } catch(e) {
+        console.log("error adding doc: ", e)
+    }
+}
 
 // add new exercise to category
-export async function addToCategory(name, category, type, weightUnit, collectionName) {
+export async function addToCategory(name, scheme, weightUnit, collectionType, categoryId) {
     try {
-        const docRef = await addDoc(collectionName, {
+        const categoryDocRef = doc(collectionType, categoryId)
+        const exercisesCollectionRef = collection(categoryDocRef, "exercises")
+        await addDoc(exercisesCollectionRef, {
             name: name,
-            category: category,
-            type: type,
+            scheme: scheme,
             weightUnit: weightUnit
         })
     } catch(e) {
