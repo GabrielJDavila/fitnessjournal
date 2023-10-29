@@ -256,6 +256,10 @@ header {
   margin-bottom: 2rem;
 }
 
+.message {
+  color: rgb(220, 104, 75);
+}
+
 /*============ NewCat.jsx styles ===================*/
 
 .new-cat-container {

@@ -10,8 +10,7 @@ export default function NewEx() {
         weightUnit: ""
     })
     const [loadedCategories, setLoadedCategories] = useState([])
-
-    console.log(newExFormData)
+    const [toggleMessageState, setToggleMessageState] = useState(false)
 
     async function loadData() {
         try {
@@ -26,16 +25,26 @@ export default function NewEx() {
         loadData()
     }, [])
 
+    useEffect(() => {
+        if(toggle) {
+            const timeout = setTimeout(() => {
+                setToggleMessageState(false)
+            }, 3000)
+
+            return () => clearTimeout(timeout)
+        }
+    }, [toggle])
+
     function handleSubmit(e) {
         e.preventDefault()
         const selectedCategory = loadedCategories.find(cat => cat.name === newExFormData.category)
         if(selectedCategory) {
             addToCategory(newExFormData.name, newExFormData.scheme, newExFormData.weightUnit, categoriesCollection, selectedCategory.id)
             clearForm()
+            toggle()
         } else {
             console.log("invalid category selected")
         }
-        
     }
 
     function handleChange(name, value, stateSetter) {
@@ -60,6 +69,10 @@ export default function NewEx() {
             scheme: "",
             weightUnit: ""
         })
+    }
+
+    function toggle() {
+        setToggleMessageState(prev => !prev)
     }
 
 
@@ -115,6 +128,7 @@ export default function NewEx() {
                 <option value="weight-kg">kg</option>
             </select>
             <button className="confirm-btn">add exercise</button>
+            { toggleMessageState && <p className="message">exercise saved!</p>}
         </form>
     )
 }
